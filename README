@@ -1,0 +1,17 @@
+# venvpp2
+Welcome to venvpp2!
+
+This project is an evolution from previous venvpp.
+The main enhancements with respect to its predecessor are:
+*Conan v2* and *CMake v4* with the usage of CMakePresets as first class citizens replacing the older custom Python scripts to addressing Configure, Build, Test and Package the project.
+
+## Getting started
+In order to spin up a fresh C++ development environment in your local repository just run the following command:
+
+```bash
+# Windows
+env\setup.bat
+
+# Linux / MacOS
+./env/setup.sh
+```

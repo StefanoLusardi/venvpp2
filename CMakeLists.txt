@@ -1,0 +1,27 @@
+cmake_minimum_required(VERSION 3.10)
+project(cpp_code_analysis)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+message(${CMAKE_CXX_COMPILER_ID})
+message(${CMAKE_CXX_COMPILER_VERSION})
+message(${CMAKE_CXX_COMPILER})
+
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    message(STATUS "Using Clang compiler")
+    add_compile_options(-stdlib=libc++)
+    add_link_options(-stdlib=libc++)
+elseif (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    message(STATUS "Using GCC compiler")
+    add_compile_options(-fdiagnostics-color=always)
+    add_link_options(-fdiagnostics-color=always)
+else()
+    message(STATUS "Using unknown compiler")
+endif()
+
+find_package(spdlog REQUIRED)
+add_executable(app main.cpp)
+target_link_libraries(app PRIVATE spdlog::spdlog)

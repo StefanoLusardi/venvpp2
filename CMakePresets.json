@@ -1,0 +1,103 @@
+{
+    "version": 10,
+    "cmakeMinimumRequired": {
+        "major": 4,
+        "minor": 0,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "base_preset",
+            "hidden": true,
+            "description": "Sets Ninja generator, build and install directory",
+            "installDir": "${sourceDir}/install",
+            "generator": "Ninja",
+            "environment": {
+                "NINJA_STATUS": "[%f/%t %p %es] ",
+                "CMAKE_CC_COMPILER": "clang-19",
+                "CMAKE_CXX_COMPILER": "clang++-19",
+                "CMAKE_CXX_FLAGS": "-stdlib=libc++",
+                "CMAKE_EXE_LINKER_FLAGS": "-stdlib=libc++"
+            }
+        },
+        {
+            "name": "debug_clang_19",
+            "hidden": false,
+            "inherits": "base_preset",
+            "displayName": "Debug Clang 19",
+            "binaryDir": "${sourceDir}/build/Debug",
+            "toolchainFile": "build/Debug/generators/conan_toolchain.cmake",
+            "environment": {
+                "CC": "clang-19",
+                "CXX": "clang++-19"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "release_clang_19",
+            "hidden": false,
+            "inherits": "base_preset",
+            "displayName": "Release Clang 19",
+            "binaryDir": "${sourceDir}/build/Release",
+            "toolchainFile": "build/Release/generators/conan_toolchain.cmake",
+            "environment": {
+                "CC": "clang-19",
+                "CXX": "clang++-19"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "build_debug",
+            "configurePreset": "debug_clang_19",
+            "description": "Build the project using the Debug configuration",
+            "targets": [],
+            "cleanFirst": true,
+            "jobs": 0,
+            "configuration": "Debug"
+        },
+        {
+            "name": "build_release",
+            "configurePreset": "release_clang_19",
+            "description": "Build the project using the Release configuration",
+            "targets": [],
+            "cleanFirst": true,
+            "jobs": 0,
+            "configuration": "Release"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "test_debug",
+            "configurePreset": "debug_clang_19",
+            "description": "Run tests using the Debug configuration",
+            "configuration": "Debug"
+        },
+        {
+            "name": "test_release",
+            "configurePreset": "release_clang_19",
+            "description": "Run tests using the Release configuration",
+            "configuration": "Release"
+        }
+    ],
+    "workflowPresets": [
+        {
+            "name": "deploy",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "debug_clang_19"
+                },
+                {
+                    "type": "build",
+                    "name": "build_debug"
+                }
+            ]
+        }
+    ]
+}

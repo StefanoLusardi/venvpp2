@@ -1,0 +1,12 @@
+[settings]
+arch=x86_64
+compiler=msvc
+compiler.cppstd=20
+# compiler.version=194
+os=Windows
+
+[conf]
+tools.cmake.cmaketoolchain:generator=Ninja
+tools.system.package_manager:mode=install
+tools.system.package_manager:sudo=True
+tools.build:compiler_executables={ 'c': 'cl', 'cpp': 'cl' }

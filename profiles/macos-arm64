@@ -1,12 +1,13 @@
 [settings]
-arch=x86_64
-compiler=msvc
+os=Macos
+arch=armv8
+compiler=apple-clang
+compiler.version=15
+compiler.libcxx=libc++
 compiler.cppstd=20
-# compiler.version=194
-os=Windows
+build_type=Release
 
 [conf]
 tools.cmake.cmaketoolchain:generator=Ninja
 tools.system.package_manager:mode=install
 tools.system.package_manager:sudo=True
-tools.build:compiler_executables={ 'c': 'cl', 'cpp': 'cl' }

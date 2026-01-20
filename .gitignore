@@ -1,5 +1,7 @@
+!**/.vscode
+**/build/
+**/install/
+**/.venv/
 **/.conan2
-**/.venv
-**/build
-**/CMakeUserPresets.json
+CMakeUserPresets.json
 **/compile_commands.json

@@ -1,13 +1,13 @@
 [settings]
+os=Windows
 arch=x86_64
-compiler=clang
+compiler=msvc
+compiler.version=193
 compiler.cppstd=20
-compiler.libcxx=libc++
-compiler.version=19
-os=Linux
+build_type=Release
 
 [conf]
 tools.cmake.cmaketoolchain:generator=Ninja
 tools.system.package_manager:mode=install
 tools.system.package_manager:sudo=True
-tools.build:compiler_executables={ 'c': 'clang-19', 'cpp': 'clang++-19' }
+tools.build:compiler_executables={ 'c': 'cl', 'cpp': 'cl' }

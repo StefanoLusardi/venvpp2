@@ -1,4 +1,9 @@
 #!/bin/bash
+set -e
+
+echo "=========================================="
+echo "Setting up virtual environment..."
+echo "=========================================="
 
 # Create a virtual environment
 python3 -m venv .venv
@@ -10,10 +15,10 @@ echo "export CONAN_HOME=\$PWD/.conan2" >> .venv/bin/activate
 source .venv/bin/activate
 
 # Upgrade pip
-pip install --upgrade pip
+python3 -m pip install --upgrade pip
 
 # Install the required packages
-pip install -r requirements.txt
+pip install -r scripts/requirements.txt
 
 # Install pre-commit hooks
 pre-commit install
@@ -24,4 +29,4 @@ echo "=========================================="
 exec "$SHELL"
 
 # chmod +x scripts/env/setup.sh
-# ./scripts/env/setup.sh
+# scripts/env/setup.sh
